@@ -1,0 +1,14 @@
+/ Main Information
+%table
+  %tr
+    %td#right_align Teacher:
+    %td= @course[:teacher]
+  %tr
+    %td#right_align Date:
+    %td= @course[:start_date].to_s + " to " + @course[:end_date].to_s
+  %tr
+    %td#right_align Time:
+    %td= @course[:start_time].to_s + " to " + @course[:end_time].to_s
+
+-@course[:assistants].each do |assistant|
+  %p= assistant
