@@ -24,6 +24,13 @@ just compile the site and throw it up on a webpage.
 
 The eventual idea is to have a collection of repositories to hold courses!
 
+THEMES: (views)
+
+Themes should be independent of the controller and business logic of the
+generator. They are a collection of haml and sass files and potentially a
+configuration yaml file (picking color schemes and setting options exposed
+to the views through the controller).
+
 TODO:
 
 markdown README
@@ -31,3 +38,4 @@ intructions
 gem creation?
 figure out how to separate views (for theming)
 figure out how to separate course information from this code (gemify)
+copy content foo that is not renderable verbatim to output/content
