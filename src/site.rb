@@ -5,16 +5,18 @@ require_relative 'controller'
 
 class Site
 	attr_accessor :config
+	attr_accessor :schedule
 
-	def initialize(config_file, common)
+	def initialize(config_file, schedule_file, common)
 		# Read the header
 		@header = File.read('common/header.haml')
 
 		start_index = @header.rindex(/\n/m, -2)+1
 		@header_indent = @header[start_index..@header.index(/\S/, start_index)-1]
 
-		# Open the configuration file
+		# Open the configuration files
 		self.config = YAML.load_file(config_file)
+		self.schedule = YAML.load_file(schedule_file)
 
 		@common = common
 	end
@@ -46,7 +48,7 @@ class Site
 		content = content + "= Tilt::HamlTemplate.new('common/footer.haml').render self"
 
 		# Render the haml
-		template = Tilt::HamlTemplate.new do
+		template = Tilt::HamlTemplate.new(nil, 1, {:format => :html5}) do
 			content
 		end
 
