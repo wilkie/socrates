@@ -1,4 +1,5 @@
 require 'tilt'
+require 'haml'
 
 require_relative 'site'
 
@@ -27,7 +28,7 @@ end
 
 # Establish the Model
 
-site = Site.new('config/site.yml', common_files)
+site = Site.new('config/site.yml', 'config/schedule.yml', common_files)
 
 # CSS files are done first
 
