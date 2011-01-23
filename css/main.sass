@@ -1,6 +1,53 @@
+@mixin rounded($side, $radius: 10px)
+  border-#{$side}-radius: $radius
+  -moz-border-radius-#{$side}: $radius
+  -webkit-border-#{$side}-radius: $radius
+
+body
+  background-color: gray
+
 #code_box 
   width: 80px
+
+#lecture_date_cell
+  vertical-align: top
+  padding-right: 35px
+
+#lecture_date_box
+  text-align: center
+  width: 52px
+  background-color: white
+  color: red
+  border: 2px solid #555
+  @include rounded(topleft)
+  @include rounded(topright)
+  @include rounded(bottomleft)
+  @include rounded(bottomright)
+
+#lecture_date_box_month
+
+#lecture_date_box_day
+  font-size: 1.5em
+
+#lecture_title
+  font-size: 1.6em
+
+#lecture_description
+  color: #555
+  font-style: italic
+
+#lecture_item_cell
+  vertical_align: top
+  padding-left: 20px
+
+#lecture_item_content
+  vertical_align: center
+
+  ul
+    list-style-type: none
 
 #right_align
   align: right
 
+#lecture_info
+  padding-bottom: 15px
