@@ -8,27 +8,27 @@ class Controller
 
 	def header
 		@course = {}
-		@course[:number] = @site.config["course"]["number"]
-		@course[:title] = @site.config["course"]["title"]
+		@course[:number] = @site.config["number"]
+		@course[:title] = @site.config["title"]
 	end
 
 	def information
-		@course[:teacher] = @site.config["course"]["teacher"]
-		@course[:assistants] = @site.config["course"]["assistants"]
-		@course[:start_date] = @site.config["course"]["start date"]
-		@course[:end_date] = @site.config["course"]["end date"]
+		@course[:teacher] = @site.config["teacher"]
+		@course[:assistants] = @site.config["assistants"]
+		@course[:start_date] = @site.config["start date"]
+		@course[:end_date] = @site.config["end date"]
 
-		start_time = @site.config["course"]["start time"]
+		start_time = @site.config["start time"]
 		start_time = Time.new(0, nil, nil, start_time / 60, start_time % 60)
 
 		@course[:start_time] = start_time.strftime("%l:%M%P").strip
 
-		end_time = @site.config["course"]["end time"]
+		end_time = @site.config["end time"]
 		end_time = Time.new(0, nil, nil, end_time / 60, end_time % 60)
 
 		@course[:end_time] = end_time.strftime("%l:%M%P").strip
 
-		@course[:days] = @site.config["course"]["days"].inject("") do |result, element|
+		@course[:days] = @site.config["days"].inject("") do |result, element|
 			result + element + ", "
 		end
 		@course[:days] = @course[:days][0..-3]
@@ -36,9 +36,9 @@ class Controller
 
 	def schedule
 		# Get array of Date foo
-		@no_class_dates = @site.config["course"]["no class"]
+		@no_class_dates = @site.config["no class"]
 
-		@days = @site.config["course"]["days"].map { |s| s.capitalize }
+		@days = @site.config["days"].map { |s| s.capitalize }
 		days_mask = @days.inject(0) do |result, str| 
 			if str == "Sunday"
 				result | 1
@@ -57,8 +57,8 @@ class Controller
 			end
 		end
 
-		@start_date = @site.config["course"]["start date"]
-		@end_date = @site.config["course"]["end date"]
+		@start_date = @site.config["start date"]
+		@end_date = @site.config["end date"]
 
 		@dates = (@start_date..@end_date).select do |date|
 			days_mask & (1 << date.wday) > 0 and not @no_class_dates.include?(date)
