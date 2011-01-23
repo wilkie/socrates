@@ -29,7 +29,7 @@ end
 
 # Establish the Model
 
-site = Site.new('config/site.yml', 'config/schedule.yml', common_files)
+site = Site.new('course/information.yml', 'course/schedule.yml', common_files)
 
 # CSS files are done first
 

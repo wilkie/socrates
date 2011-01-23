@@ -6,11 +6,11 @@ content - For the content of the course... homework, labs, etc
 static - Content that will be copied verbatim to the output
 output - All content that is generated or in static will be placed here
 src - The source code for the generator logic and controller
-config - Course information gets placed here (model data)
+course - Course information gets placed here (model data)
 html - Haml code (view)
 css - Sass code (view)
 
-Might merge content and config. However, config is model data and content is
+Might merge content and course. However, course model data and content is
 just extra pages (in markdown, etc)
 
 Controller and model are in one place... kinda iffy design.

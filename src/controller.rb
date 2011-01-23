@@ -36,7 +36,7 @@ class Controller
 
 	def schedule
 		# Get array of Date foo
-		no_class_dates = @site.config["course"]["no class"]
+		@no_class_dates = @site.config["course"]["no class"]
 
 		@days = @site.config["course"]["days"].map { |s| s.capitalize }
 		days_mask = @days.inject(0) do |result, str| 
@@ -61,7 +61,7 @@ class Controller
 		@end_date = @site.config["course"]["end date"]
 
 		@dates = (@start_date..@end_date).select do |date|
-			days_mask & (1 << date.wday) > 0
+			days_mask & (1 << date.wday) > 0 and not @no_class_dates.include?(date)
 		end
 
 		i = 0
