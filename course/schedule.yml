@@ -11,6 +11,19 @@
   links:
     - title: String Documentation
       href: http://download.oracle.com/javase/1.4.2/docs/api/java/lang/String.html
+  videos:
+    - title: Demoscene Foo
+      href: http://youtube.com/
+    - title: Demoscene Two
+      href: http://youtube.com/
+    - title: Demoscene Three
+      href: http://youtube.com/
+    - title: Demoscene Three
+      href: http://youtube.com/
+    - title: Demoscene Three
+      href: http://youtube.com/
+    - title: Demoscene Three
+      href: http://youtube.com/
 - title: What is Inside?
   description: A Look at the Real World Implementation
   slides: 

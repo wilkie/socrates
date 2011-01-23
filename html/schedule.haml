@@ -12,7 +12,7 @@
           #lecture_date_box_day= lecture[:date].strftime("%d")
           #lecture_date_box_wday= lecture[:date].strftime("%A")[0..2]
 
-      %td
+      %td#lecture_info_cell
         #lecture_title
           = lecture[:title]
         #lecture_description
@@ -61,3 +61,14 @@
                     - lecture[:links].each do |link|
                       %li
                         %a{:alt => "Link to " + "#{link[:title]}", :href => "#{link[:href]}", :target => "_blank"}= link[:title]
+          - unless lecture[:videos].size == 0
+            / Videos
+            %table
+              %tr
+                %td#lecture_item_cell
+                  %img{:src => "img/videos.png"}
+                %td#lecture_item_content
+                  %ul
+                    - lecture[:videos].each do |video|
+                      %li
+                        %a{:alt => "Link to " + "#{video[:title]}", :href => "#{video[:href]}", :target => "_blank"}= video[:title]
