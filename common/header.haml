@@ -6,7 +6,7 @@
     - else
       %title= @course[:number]
 
-    %link{:rel => "stylesheet", :href => "css/main.css", :type => "text/css"}
+    %link{:rel => "stylesheet", :href => @prepend_path + "css/main.css", :type => "text/css"}
   %body
     = Tilt::HamlTemplate.new('common/navigation.haml').render
 

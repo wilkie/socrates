@@ -1,9 +1,10 @@
 # Controller
 
 class Controller
-	def initialize(model, title)
+	def initialize(model, title, prepend_path)
 		@site = model
 		@title = title
+		@prepend_path = prepend_path
 	end
 
 	def header
@@ -93,6 +94,14 @@ class Controller
 				result[:links] = lecture["links"]
 			end
 
+			if lecture["videos"] == nil
+				result[:videos] = []
+			elsif not lecture["videos"].instance_of? Array
+				result[:videos] = [lecture["videos"]]
+			else
+				result[:videos] = lecture["videos"]
+			end
+
 			# reform slides array
 			result[:slides] = result[:slides].map do |slide|
 				new_slide = {}
@@ -128,6 +137,11 @@ class Controller
 			# reform links array
 			result[:links] = result[:links].map do |link|
 				{:title => link["title"], :href => link["href"]}
+			end
+
+			# reform videos array
+			result[:videos] = result[:videos].map do |video|
+				{:title => video["title"], :href => video["href"]}
 			end
 
 			# reform notes array

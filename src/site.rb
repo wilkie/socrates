@@ -21,7 +21,7 @@ class Site
 		@common = common
 	end
 
-	def render_sass(sass_file)
+	def render_sass(sass_file, prepend_path = "")
 		# Get the title from the file name
 
 		filename = sass_file[sass_file.rindex('/')+1..sass_file.rindex('.')-1]
@@ -37,7 +37,44 @@ class Site
 		template.render self
 	end
 
-	def render_haml(haml_file)
+	def render_md(md_file, prepend_path = "")
+		# Get the title from the file name
+
+		filename = md_file[md_file.rindex('/')+1..md_file.rindex('.')-1]
+		
+		content = @header + @header_indent
+		content = content + ":markdown"
+
+		md_content = File.read(md_file)
+		content = content + md_content.lines.inject("") do |result, line|
+			result + "\n" + @header_indent + "  " + line
+		end
+
+		content = content + "\n" + @header_indent
+		content = content + "= Tilt::HamlTemplate.new('common/footer.haml').render self"
+
+		# Render the haml
+		template = Tilt::HamlTemplate.new(nil, 1, {:format => :html5}) do
+			content
+		end
+
+		title = filename.split('_').inject("") do |result, word|
+			result + word.capitalize + " "
+		end
+		title.strip!
+
+		controller = Controller.new(self, title, prepend_path)
+
+		@common.each do |method|
+			if controller.public_methods.include?(method)
+				controller.send method
+			end
+		end
+
+		template.render controller
+	end
+
+	def render_haml(haml_file, prepend_path = "")
 		# Get the title from the file name
 
 		filename = haml_file[haml_file.rindex('/')+1..haml_file.rindex('.')-1]
@@ -57,7 +94,7 @@ class Site
 		end
 		title.strip!
 
-		controller = Controller.new(self, title)
+		controller = Controller.new(self, title, prepend_path)
 
 		@common.each do |method|
 			if controller.public_methods.include?(method)
