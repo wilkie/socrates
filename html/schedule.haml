@@ -60,4 +60,4 @@
                   %ul
                     - lecture[:links].each do |link|
                       %li
-                        %a{:alt => "Link to " + "#{link[:title]}", :href => "#{link[:href]}"}= link[:title]
+                        %a{:alt => "Link to " + "#{link[:title]}", :href => "#{link[:href]}", :target => "_blank"}= link[:title]
