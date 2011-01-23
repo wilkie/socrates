@@ -1,5 +1,6 @@
 require 'tilt'
 require 'haml'
+require 'fileutils'
 
 require_relative 'site'
 
@@ -52,3 +53,10 @@ Dir.new("html").each do |f|
 	end
 end
 
+# Copy static/ verbatim to output
+
+Dir.new("static").each do |f|
+	if f[0] != '.'
+		FileUtils.cp_r "static/" + f, "output/."
+	end
+end
