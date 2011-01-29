@@ -1,13 +1,26 @@
 require 'yaml'
 
 class Information
-	def self.instance
-		@@last_loaded
+	attr_accessor :configuration_file
+
+	def self.load(configuration_file)
+		if not defined?(@@instances)
+			@@instances = {}
+		end
+
+		if @@instances[configuration_file] == nil
+			info = Information.new
+			info.load(configuration_file)
+			@@instances[configuration_file] = info
+		end
+
+		@@instances[configuration_file]
 	end
 
-	def initialize(configuration_file)
-		@@last_loaded = self
-		@config = YAML.load_file(configuration_file)	
+	private :load
+	def load(configuration_file)
+		@config = YAML.load_file(configuration_file)
+		self.configuration_file = configuration_file
 	end
 
 	def title

@@ -4,9 +4,9 @@ require_relative '../lib/socrates/models/schedule'
 describe Schedule do
 	before(:each) do
 		# We need some Information model
-		Information.new("test/information/normal.yml")
+		information = Information.load("test/information/normal.yml")
 		# This represents a common course schedule
-		@normal = Schedule.new("test/schedule/normal.yml")
+		@normal = Schedule.load(information, "test/schedule/normal.yml")
 	end
 
 	describe "#lectures" do

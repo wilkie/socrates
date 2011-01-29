@@ -1,25 +1,40 @@
 require_relative 'information'
 
 class Schedule
-	def self.instance
-		@@last_loaded
+	attr_accessor :information
+	attr_accessor :configuration_file
+
+	def self.load(information, configuration_file)
+		if not defined?(@@instances)
+			@@instances = {}
+		end
+
+		key = information.configuration_file + configuration_file
+		if @@instances[key] == nil
+			sched = Schedule.new
+			sched.load(information, configuration_file)
+			@@instances[key] = sched
+		end
+
+		@@instances[key]
 	end
 
-	def initialize(configuration_file)
-		@@last_loaded = self
-		@information = Information.instance
+	private :load
+	def load(information, configuration_file)
+		self.information = information
 		@schedule = YAML.load_file(configuration_file)
+		self.configuration_file = configuration_file
 	end
 
 	def dates
 		# Get array of Date foo
-		no_class_dates = @information.no_class
+		no_class_dates = information.no_class
 
-		days_mask = @information.days.inject(0) do |result, num| 
+		days_mask = information.days.inject(0) do |result, num| 
 			result | (1 << num)
 		end
 
-		(@information.start_date..@information.end_date).select do |date|
+		(information.start_date..information.end_date).select do |date|
 			days_mask & (1 << date.wday) > 0 and not no_class_dates.include?(date)
 		end
 	end

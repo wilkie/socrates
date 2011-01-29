@@ -3,13 +3,29 @@ require 'yaml'
 require_relative 'assignments'
 
 class Invocation
-	def self.instance
-		@@last_loaded
+	attr_accessor :configuration_file
+	attr_accessor :assignments
+
+	def self.load(assignments, configuration_file)
+		if not defined?(@@instances)
+			@@instances = {}
+		end
+
+		key = assignments.configuration_file + configuration_file
+		if @@instances[key] == nil
+			invocation = Invocation.new
+			invocation.load(assignments, configuration_file)
+			@@instances[key] = invocation
+		end
+
+		@@instances[key]
 	end
 
-	def initialize(configuration_file)
-		@@last_loaded = self
+	private :load
+	def load(assignments, configuration_file)
 		@invocation = YAML.load_file(configuration_file)
+		self.configuration_file = configuration_file
+		self.assignments = assignments
 	end
 
 	def types
@@ -17,7 +33,7 @@ class Invocation
 	end
 
 	def list(type)
-		data = Assignments.instance.list(type)
+		data = self.assignments.list(type)
 		@invocation[type].map do |hash|
 			result = {}
 			result[:title] = hash["title"]

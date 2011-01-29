@@ -1,13 +1,26 @@
 require 'yaml'
 
 class Assignments
-	def self.instance
-		@@last_loaded
+	attr_accessor :configuration_file
+
+	def self.load(configuration_file)
+		if not defined?(@@instances)
+			@@instances = {}
+		end
+
+		key = configuration_file
+		if @@instances[key] == nil
+			assigns = Assignments.new
+			assigns.load(configuration_file)
+			@@instances[key] = assigns
+		end
+
+		@@instances[key]
 	end
 
-	def initialize(configuration_file)
-		@@last_loaded = self
+	def load(configuration_file)
 		@assignments = YAML.load_file(configuration_file)
+		self.configuration_file = configuration_file
 	end
 
 	def types
