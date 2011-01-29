@@ -1,0 +1,19 @@
+labs:
+    - title: Picobot
+      href: labs/lab0
+    - title: Calorie Counter
+      href: labs/lab1
+    - title: Foo
+      href: labs/lab2
+
+assignments:
+    - title: Picobot
+      href: hw/hw0
+    - title: ISP
+      href: hw/hw1
+
+projects:
+    - title: Blackjack
+      href: projects/pj0
+    - title: One Time Pad
+      href: projects/pj1
