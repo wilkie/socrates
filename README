@@ -13,7 +13,7 @@ Model: The classes related to organizing the data that will be materialized via 
 
   * assignments.yaml : This describes the workload of the course. Each value defines a set of work. That is, you can say 'labs' is a set of work, and this would suggest that there will be a lab section on the site.
 
-Controller: The classes related to performing actions and feed data to a particular view.
+Controller: The classes related to performing actions and feed data to a particular view. Remember that the model is read-only and immutable. Therefore, the controller is, in this project, basically just the conduit from the model to the view.
 
   The Controller will be specialized and lightweight. It is a single class with functions that are defined when necessary for each View. For instance, if there is a schedule.haml View, then it will attempt to call the schedule function in the controller and pass the instance of the controller as the class instance that the view is rendered within.
 
