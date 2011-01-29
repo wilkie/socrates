@@ -1,8 +1,8 @@
 require_relative '../lib/socrates/models/assignments'
 
-describe Assignments do
+describe Socrates::Models::Assignments do
 	before(:each) do
-		@normal = Assignments.load('test/assignments/normal.yml')
+		@normal = Socrates::Models::Assignments.load('test/assignments/normal.yml')
 	end
 
 	describe "#types" do

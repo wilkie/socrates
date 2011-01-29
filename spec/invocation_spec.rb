@@ -2,10 +2,10 @@
 
 require_relative '../lib/socrates/models/invocation'
 
-describe Invocation do
+describe Socrates::Models::Invocation do
 	before(:each) do
-		assignments = Assignments.load('test/assignments/normal.yml')
-		@normal = Invocation.load(assignments, 'test/invocation/normal.yml')
+		assignments = Socrates::Models::Assignments.load('test/assignments/normal.yml')
+		@normal = Socrates::Models::Invocation.load(assignments, 'test/invocation/normal.yml')
 	end
 
 	describe "#types" do

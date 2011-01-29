@@ -1,12 +1,12 @@
 # specs/schedule.rb
 require_relative '../lib/socrates/models/schedule'
 
-describe Schedule do
+describe Socrates::Models::Schedule do
 	before(:each) do
 		# We need some Information model
-		information = Information.load("test/information/normal.yml")
+		information = Socrates::Models::Information.load("test/information/normal.yml")
 		# This represents a common course schedule
-		@normal = Schedule.load(information, "test/schedule/normal.yml")
+		@normal = Socrates::Models::Schedule.load(information, "test/schedule/normal.yml")
 	end
 
 	describe "#lectures" do

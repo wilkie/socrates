@@ -1,10 +1,10 @@
 # specs/information.rb
 require_relative '../lib/socrates/models/information'
 
-describe Information do
+describe Socrates::Models::Information do
 	before(:each) do
 		# This represents a common course description:
-		@normal = Information.load("test/information/normal.yml")
+		@normal = Socrates::Models::Information.load("test/information/normal.yml")
 	end
 
 	describe "#title" do
@@ -22,23 +22,23 @@ describe Information do
 	# It is lenient about the plurization of the term and whether or not the value is plural
 	describe "#assistants" do
 		it "returns the assistants that are given in the yaml file when one is listed as assistant" do
-			information = Information.load("test/information/single_teacher.yml")
+			information = Socrates::Models::Information.load("test/information/single_teacher.yml")
 			information.assistants[0].should eql("Mykolas Dapkus")
 		end
 
 		it "returns the teachers that are given in the yaml file when more than one is listed as assistant" do
-			information = Information.load("test/information/multiple_teacher.yml")
+			information = Socrates::Models::Information.load("test/information/multiple_teacher.yml")
 			information.assistants[0].should eql("Mykolas Dapkus")
 			information.assistants[1].should eql("Jane Smith")
 		end
 
 		it "returns the teachers that are given in the yaml file when one is listed as assistants" do
-			information = Information.load("test/information/single_teachers.yml")
+			information = Socrates::Models::Information.load("test/information/single_teachers.yml")
 			information.assistants[0].should eql("Mykolas Dapkus")
 		end
 
 		it "returns the teachers that are given in the yaml file when more than one is listed as assistants" do
-			information = Information.load("test/information/multiple_teachers.yml")
+			information = Socrates::Models::Information.load("test/information/multiple_teachers.yml")
 			information.assistants[0].should eql("Mykolas Dapkus")
 			information.assistants[1].should eql("Jane Smith")
 		end
@@ -47,23 +47,23 @@ describe Information do
 	# It is lenient about the plurization of the term and whether or not the value is plural
 	describe "#teachers" do
 		it "returns the teachers that are given in the yaml file when one is listed as teacher" do
-			information = Information.load("test/information/single_teacher.yml")
+			information = Socrates::Models::Information.load("test/information/single_teacher.yml")
 			information.teachers[0].should eql("Dave Wilkinson")
 		end
 
 		it "returns the teachers that are given in the yaml file when more than one is listed as teacher" do
-			information = Information.load("test/information/multiple_teacher.yml")
+			information = Socrates::Models::Information.load("test/information/multiple_teacher.yml")
 			information.teachers[0].should eql("Dave Wilkinson")
 			information.teachers[1].should eql("John Smith")
 		end
 
 		it "returns the teachers that are given in the yaml file when one is listed as teachers" do
-			information = Information.load("test/information/single_teachers.yml")
+			information = Socrates::Models::Information.load("test/information/single_teachers.yml")
 			information.teachers[0].should eql("Dave Wilkinson")
 		end
 
 		it "returns the teachers that are given in the yaml file when more than one is listed as teachers" do
-			information = Information.load("test/information/multiple_teachers.yml")
+			information = Socrates::Models::Information.load("test/information/multiple_teachers.yml")
 			information.teachers[0].should eql("Dave Wilkinson")
 			information.teachers[1].should eql("John Smith")
 		end
@@ -115,7 +115,7 @@ describe Information do
 		end
 
 		it "should work when days contains a single value" do
-			information = Information.load("test/information/single_day.yml")
+			information = Socrates::Models::Information.load("test/information/single_day.yml")
 			information.days.should eql([6])
 		end
 	end
