@@ -15,17 +15,17 @@
       href: http://download.oracle.com/javase/1.4.2/docs/api/java/util/Scanner.html
   videos:
     - title: Demoscene Foo
-      href: http://youtube.com/
+      href: http://youtube.com/1
     - title: Demoscene Two
-      href: http://youtube.com/
+      href: http://youtube.com/2
     - title: Demoscene Three
-      href: http://youtube.com/
-    - title: Demoscene Three
-      href: http://youtube.com/
-    - title: Demoscene Three
-      href: http://youtube.com/
-    - title: Demoscene Three
-      href: http://youtube.com/
+      href: http://youtube.com/3
+    - title: Demoscene Four
+      href: http://youtube.com/4
+    - title: Demoscene Five
+      href: http://youtube.com/5
+    - title: Demoscene Six
+      href: http://youtube.com/6
 - title: What is Inside?
   description: A Look at the Real World Implementation
   slides: 

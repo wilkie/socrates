@@ -51,6 +51,20 @@ describe Schedule do
 				@lectures[2][:notes][0].should eql({:title => "Architecture 101", :files => [{:title => "html", :href => "Architecture.html"}, {:title => "pdf", :href => "Architecture.pdf"}, {:title => "ps", :href => "Architecture.ps"}]})
 			end
 
+			it "should contain an empty array for the videos given by the yaml file if none are given" do
+				@lectures[0][:videos].should eql([])
+			end
+
+			it "should contain an array of title, href pairs to describe videos given in the yaml file" do
+				@lectures[1][:videos].should eql([
+					{:title => "Demoscene Foo", :href => "http://youtube.com/1"},
+					{:title => "Demoscene Two", :href => "http://youtube.com/2"},
+					{:title => "Demoscene Three", :href => "http://youtube.com/3"},
+					{:title => "Demoscene Four", :href => "http://youtube.com/4"},
+					{:title => "Demoscene Five", :href => "http://youtube.com/5"},
+					{:title => "Demoscene Six", :href => "http://youtube.com/6"}])
+			end
+
 			it "should contain an empty array for the links given by the yaml file if none are given" do
 				@lectures[0][:links].should eql([])
 			end
