@@ -7,12 +7,21 @@ module Socrates
 		Usage:
 		  socrates invoke COURSE_PATH [DESTINATION_PATH='.']
 		  socrates scaffold COURSE_NAME
+
+		Description:
+		  The 'invoke' command will spawn a new instance of a course given by COURSE_PATH
+		  and generate an invocation.yml file which is tailored to the course information.
+
+		  The 'scaffold' command will generate empty yaml files that can be used to
+		  describe a new course. A directory will be created of name COURSE_NAME to hold
+		  the files. The path of this directory can then be used with 'invoke' to create
+		  and instance of this course.
 		USAGE
 
 		class << self
 			def set_options
 				@opts = OptionParser.new do |opts|
-					opts.banner = BANNER.gsub(/^\s{2}/, '')
+					opts.banner = BANNER.gsub(/^\t{2}/, '')
 
 					opts.separator ''
 					opts.separator 'Options:'
