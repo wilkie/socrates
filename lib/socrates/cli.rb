@@ -50,7 +50,9 @@ module Socrates
 				case ARGV.first
 				when 'invoke'
 					fail unless ARGV[1]
-					Socrates.invoke(ARGV[1])
+					dest = '.'
+					dest = ARGV[2] unless not ARGV[2]
+					Socrates.invoke(ARGV[1], dest)
 				when 'scaffold'
 				end
 			end
