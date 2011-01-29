@@ -1,7 +1,7 @@
 require 'rake'
 require 'rspec/core/rake_task'
 
-# rake jeweler
+# rake gemspec
 begin
 	require 'jeweler'
 	
