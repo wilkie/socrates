@@ -1,0 +1,12 @@
+= socrates
+
+== Contributing to socrates
+ 
+== Copyright
+
+This work waives copyright according to the Creative Commons CC-0. See LICENSE.txt for
+further details.
+
+You may elect to use the MIT license as well, if CC-0 does not apply to your region.
+See MIT.txt for further details.
+

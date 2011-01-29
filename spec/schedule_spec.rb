@@ -1,5 +1,5 @@
 # specs/schedule.rb
-require_relative '../models/schedule'
+require_relative '../lib/socrates/models/schedule'
 
 describe Schedule do
 	before(:each) do

@@ -1,5 +1,5 @@
 # specs/information.rb
-require_relative '../models/information'
+require_relative '../lib/socrates/models/information'
 
 describe Information do
 	before(:each) do

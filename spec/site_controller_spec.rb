@@ -1,5 +1,5 @@
 # site_controller.rb
-require_relative '../controllers/site_controller'
+require_relative '../lib/socrates/controllers/site_controller'
 
 describe SiteController do
 	before(:each) do
