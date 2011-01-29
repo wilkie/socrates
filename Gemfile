@@ -1,9 +1,4 @@
-source :rubygems
-gem 'tilt'
-gem 'haml'
+source "http://rubygems.org"
 
-group :development do
-	gem 'jeweler'
-	gem 'rspec'
-	gem 'rake'
-end
+# Specify your gem's dependencies in socrates.gemspec
+gemspec
