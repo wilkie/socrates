@@ -19,4 +19,7 @@ class SiteController
 
 		@course[:days] = information.days
 	end
+
+	def assignments
+	end
 end

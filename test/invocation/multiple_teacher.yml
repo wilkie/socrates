@@ -1,8 +1,8 @@
 course:
   number: CS 0007
   title: Introduction to Programming
-  teacher: Dave Wilkinson
-  assistants: Mykolas Dapkus
+  teacher: [Dave Wilkinson, John Smith]
+  assistant: [Mykolas Dapkus, Jane Smith]
   start date: 2011-01-05
   end date: 2011-04-20
   start time: 16:30

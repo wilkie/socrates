@@ -47,9 +47,3 @@
   slides:
     - title: Types of Data
       files: Lecture3_TypesOfData.pdf
-- title: Code is Art
-  description: A look at how programming is used in culture
-  slides:
-    - title: The Demoscene and Other Cool Movements
-      files: Lecture4_Demoscene.pdf
-  optional: yes

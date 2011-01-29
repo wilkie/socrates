@@ -3,10 +3,11 @@ require_relative '../lib/socrates/models/schedule'
 
 describe Socrates::Models::Schedule do
 	before(:each) do
-		# We need some Information model
-		information = Socrates::Models::Information.load("test/information/normal.yml")
+		# We need some Invocation model
+		assignments = Socrates::Models::Assignments.load("test/assignments/normal.yml")
+		invocation = Socrates::Models::Invocation.load(assignments, "test/invocation/normal.yml")
 		# This represents a common course schedule
-		@normal = Socrates::Models::Schedule.load(information, "test/schedule/normal.yml")
+		@normal = Socrates::Models::Schedule.load(invocation, "test/schedule/normal.yml")
 	end
 
 	describe "#lectures" do
@@ -19,7 +20,7 @@ describe Socrates::Models::Schedule do
 				@lectures = @normal.lectures
 			end
 
-			it "should be given a date that reflects the course information yaml file" do
+			it "should be given a date that reflects the course invocation yaml file" do
 				i = 0
 				@lectures.each do |lecture|
 					lecture[:date].should eql(@normal.dates[i])

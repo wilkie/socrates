@@ -3,7 +3,7 @@ require 'yaml'
 module Socrates
 	module Models
 		class Assignments
-			attr_accessor :configuration_file
+			attr_reader :configuration_file
 
 			def self.load(configuration_file)
 				if not defined?(@@instances)
@@ -22,7 +22,7 @@ module Socrates
 
 			def load(configuration_file)
 				@assignments = YAML.load_file(configuration_file)
-				self.configuration_file = configuration_file
+				@configuration_file = configuration_file
 			end
 
 			def types

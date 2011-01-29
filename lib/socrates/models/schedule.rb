@@ -1,20 +1,20 @@
-require_relative 'information'
+require_relative 'invocation'
 
 module Socrates
 	module Models
 		class Schedule
-			attr_accessor :information
-			attr_accessor :configuration_file
+			attr_reader :invocation
+			attr_reader :configuration_file
 
-			def self.load(information, configuration_file)
+			def self.load(invocation, configuration_file)
 				if not defined?(@@instances)
 					@@instances = {}
 				end
 
-				key = information.configuration_file + configuration_file
+				key = invocation.configuration_file + configuration_file
 				if @@instances[key] == nil
 					sched = Schedule.new
-					sched.load(information, configuration_file)
+					sched.load(invocation, configuration_file)
 					@@instances[key] = sched
 				end
 
@@ -22,28 +22,28 @@ module Socrates
 			end
 
 			private :load
-			def load(information, configuration_file)
-				self.information = information
+			def load(invocation, configuration_file)
+				@invocation = invocation
 				@schedule = YAML.load_file(configuration_file)
-				self.configuration_file = configuration_file
+				@configuration_file = configuration_file
 			end
 
 			def dates
 				# Get array of Date foo
-				no_class_dates = information.no_class
+				no_class_dates = invocation.no_class
 
-				days_mask = information.days.inject(0) do |result, num| 
+				days_mask = invocation.days.inject(0) do |result, num| 
 					result | (1 << num)
 				end
 
-				(information.start_date..information.end_date).select do |date|
+				(invocation.start_date..invocation.end_date).select do |date|
 					days_mask & (1 << date.wday) > 0 and not no_class_dates.include?(date)
 				end
 			end
 
 			def lectures
 				# Crazy (terrible) code to rake the yaml file and produce a nice array
-				# consisting of all of the lecture information contained in the schedule
+				# consisting of all of the lecture invocation contained in the schedule
 				i = 0
 				@schedule.map do |lecture|
 					result = {}
@@ -172,6 +172,13 @@ module Socrates
 						append = "rd"
 					end
 					result[:full_date] += append + result[:date].strftime(", %Y")
+
+					if lecture["optional"] != nil and lecture["optional"] == "yes"
+						result[:optional] = true
+					else
+						result[:optional] = false
+					end
+
 					i = i + 1
 					result
 				end
