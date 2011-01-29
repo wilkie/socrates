@@ -25,6 +25,8 @@ class Schedule
 	end
 
 	def lectures
+		# Crazy (terrible) code to rake the yaml file and produce a nice array
+		# consisting of all of the lecture information contained in the schedule
 		i = 0
 		@schedule.map do |lecture|
 			result = {}
@@ -138,6 +140,9 @@ class Schedule
 
 			# Get a list of class dates
 			result[:date] = self.dates[i]
+
+			# Get the "full date"
+			# This is a helper...
 			result[:full_date] = result[:date].strftime("%A, %B ")
 			result[:full_date] += result[:date].strftime("%e").strip
 			append = "th"

@@ -19,6 +19,14 @@ describe Schedule do
 				@lectures = @normal.lectures
 			end
 
+			it "should be given a date that reflects the course information yaml file" do
+				i = 0
+				@lectures.each do |lecture|
+					lecture[:date].should eql(@normal.dates[i])
+					i = i + 1
+				end
+			end
+
 			it "should contain the title of the lecture given by the yaml file" do
 				@lectures[0][:title].should eql("Introductions")
 			end
