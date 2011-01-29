@@ -1,7 +1,11 @@
+require 'fileutils'
+
 module Socrates
 	class << self
 		def invoke(course_path, destination = '.')
 			# Create socrates.yml
+			
+			FileUtils.mkdir_p destination
 
 			File.open(destination + '/socrates.yml', 'w') do |f|
 				f.write 'course_path: ' + course_path
