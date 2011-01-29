@@ -1,0 +1,21 @@
+homework:
+  - title: Picobot
+    assigned: 2011-01-11
+    due: 2011-01-21
+  - title: ISP
+    assigned: 2011-01-25
+    due: 2011-02-04
+
+labs:
+  - title: Picobot
+    week of: 2011-01-10
+  - title: Calorie Counter
+    week of: 2011-01-24
+
+projects:
+  - title: Blackjack
+    assigned: 2011-03-10
+    due: 2011-03-30
+  - title: One Time Pad
+    assigned: 2011-04-01
+    due: 2011-04-25
