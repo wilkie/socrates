@@ -36,18 +36,18 @@ describe Socrates::Models::Invocation do
 			invocation.assistants[0].should eql("Mykolas Dapkus")
 		end
 
-		it "returns the teachers that are given in the yaml file when more than one is listed as assistant" do
+		it "returns the assistants that are given in the yaml file when more than one is listed as assistant" do
 			invocation = Socrates::Models::Invocation.load(@assignments, "test/invocation/multiple_teacher.yml")
 			invocation.assistants[0].should eql("Mykolas Dapkus")
 			invocation.assistants[1].should eql("Jane Smith")
 		end
 
-		it "returns the teachers that are given in the yaml file when one is listed as assistants" do
+		it "returns the assistants that are given in the yaml file when one is listed as assistants" do
 			invocation = Socrates::Models::Invocation.load(@assignments, "test/invocation/single_teachers.yml")
 			invocation.assistants[0].should eql("Mykolas Dapkus")
 		end
 
-		it "returns the teachers that are given in the yaml file when more than one is listed as assistants" do
+		it "returns the assistants that are given in the yaml file when more than one is listed as assistants" do
 			invocation = Socrates::Models::Invocation.load(@assignments, "test/invocation/multiple_teachers.yml")
 			invocation.assistants[0].should eql("Mykolas Dapkus")
 			invocation.assistants[1].should eql("Jane Smith")
