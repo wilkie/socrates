@@ -6,13 +6,35 @@
         .assignment_title
           %a{:name => assign[:title]}= assign[:title]
         .assignment_description= assign[:description]
-        %a{:href => assign[:href], :name => assign[:title], :alt => assign[:title]} More Details
-        -if assign[:week_of] != nil
-          Week Of
-          = assign[:week_of].strftime('%A, %B ')
-        -if assign[:assigned] != nil
-          Assigned
-          = assign[:assigned].strftime('%A, %B ')
-        -if assign[:due] != nil
-          Due
-          = assign[:due].strftime('%A, %B ')
+        .assignment_info
+          %table
+            %tr
+              %td.assignment_item_cell
+                %img{:src => "img/notes.png"}
+              %td.assignment_item_content
+                %ul
+                  %li
+                    %a{:href => assign[:href], :name => assign[:title], :alt => assign[:title]} More Details
+            -if assign[:week_of] != nil
+              %tr
+                %td.assignment_item_cell
+                  %img{:src => "img/pdf.png"}
+                %td.assignment_item_content
+                  %ul
+                    %li
+                      Week Of
+                      = assign[:week_of].strftime('%A, %B ')
+            -if assign[:assigned] != nil or assign[:due] != nil
+              %tr
+                %td.assignment_item_cell
+                  %img{:src => "img/pdf.png"}
+                %td.assignment_item_content
+                  %ul
+                    -if assign[:assigned] != nil
+                      %li
+                        Assigned
+                        = assign[:assigned].strftime('%A, %B ')
+                    -if assign[:due] != nil
+                      %li
+                        Due
+                        = assign[:due].strftime('%A, %B ')
