@@ -29,7 +29,7 @@ describe Socrates do
 
 		it "should generate a theme.yml file in the current directory if no destination is given" do
 			Dir.chdir('test')
-			Socrates.invoke('test/course')
+			Socrates.invoke('../test/course')
 			File.exists?('theme.yml').should eql(true)
 			Dir.chdir('..')
 		end 
@@ -41,7 +41,7 @@ describe Socrates do
 
 		it "should generate an invocation.yml file in the current directory if no destination is given" do
 			Dir.chdir('test')
-			Socrates.invoke('test/course')
+			Socrates.invoke('../test/course')
 			File.exists?('invocation.yml').should eql(true)
 			Dir.chdir('..')
 		end
