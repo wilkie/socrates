@@ -7,6 +7,7 @@ module Socrates
 		Usage:
 		  socrates invoke COURSE_PATH [DESTINATION_PATH='.']
 		  socrates scaffold COURSE_NAME
+		  socrates generate [OUTPUT_PATH='.']
 
 		Description:
 		  The 'invoke' command will spawn a new instance of a course given by COURSE_PATH
@@ -16,6 +17,9 @@ module Socrates
 		  describe a new course. A directory will be created of name COURSE_NAME to hold
 		  the files. The path of this directory can then be used with 'invoke' to create
 		  and instance of this course.
+
+		  The 'generate' command will produce the final pages using the information found
+		  in the configuration files and using the theme chosen.
 		USAGE
 
 		class << self
@@ -54,6 +58,10 @@ module Socrates
 					dest = ARGV[2] unless not ARGV[2]
 					Socrates.invoke(ARGV[1], dest)
 				when 'scaffold'
+				when 'generate'
+					dest = '.'
+					dest = ARGV[1] unless not ARGV[1]
+					Socrates.generate(nil, dest)
 				end
 			end
 		end
