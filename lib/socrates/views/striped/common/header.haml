@@ -13,6 +13,6 @@
         =@course[:title]
 
     / Navigation Bar
-    = Tilt::HamlTemplate.new(@theme_path + '/common/navigation.haml').render
+    = Tilt::HamlTemplate.new(@theme_path + '/common/navigation.haml').render self
 
     / Content Begins Below

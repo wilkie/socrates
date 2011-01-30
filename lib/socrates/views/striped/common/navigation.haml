@@ -1,4 +1,7 @@
 .navbar
-  %a{:alt => "Information", :href => "#{@prepend_path}information.html"} Information
+  %a{:alt => "Information", :href => "#{@path}information.html"} Information
   |
-  %a{:alt => "Schedule", :href => "#{@prepend_path}schedule.html"} Schedule
+  %a{:alt => "Schedule", :href => "#{@path}schedule.html"} Schedule
+  -@assignment_types.each do |type|
+    |
+    %a{:alt => "#{type.capitalize}", :href => "#{@path}#{type}.html"}=type.capitalize

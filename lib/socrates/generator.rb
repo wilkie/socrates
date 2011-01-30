@@ -78,7 +78,13 @@ module Socrates
 
 				Dir.new(path).each do |f|
 					if f[0] != '.' and not f == "common"
-						if File.directory?(path + "/" + f)
+						if f == "assignments.haml" and traversed = '.'
+							assignments.types.each do |type|
+								puts "Creating " + type + ".html"
+								foo = render(path + "/" + f, path_to_root, type)
+								commit(foo, dest + "/" + type + ".html")
+							end
+						elsif File.directory?(path + "/" + f)
 							FileUtils.mkdir_p dest + "/" + f
 							traverse(start_path, start_dest, traversed + "/" + f)
 						else
@@ -132,28 +138,37 @@ module Socrates
 		end
 		private :load_common
 		
-		def render(file, path)
+		def render(file, path, type = '')
 			filename = file[0..file.rindex('.') - 1]
 			filename = filename[filename.rindex('/')+1..-1]
 			ext = file[file.rindex('.')+1..-1]
 
-			title = filename.split('_').inject("") do |result, word|
-				result + word.capitalize + " "
+			if type == ''
+				title = filename.split('_').inject("") do |result, word|
+					result + word.capitalize + " "
+				end
+				title.strip!
+			else
+				title = type.capitalize
 			end
-			title.strip!
 
 			controller = Socrates::Controllers::SiteController.new(self, title, path, @theme_path)
 
 			# Controller methods for common files
 			@common_files.each do |common|
 				if controller.public_methods.include? common
+					puts "running " + common.to_s
 					controller.send common
 				end
 			end
 
 			# Render the file
 			if controller.public_methods.include? filename.intern
-				controller.send filename.intern
+				if type != ''
+					controller.send filename.intern, (type)
+				else
+					controller.send filename.intern
+				end
 			end
 
 			case ext

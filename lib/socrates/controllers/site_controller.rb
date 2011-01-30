@@ -22,6 +22,11 @@ module Socrates
 				@course[:title] = invocation.title
 			end
 
+			def navigation
+				@assignment_types = @generator.invocation.types
+				p @assignment_types
+			end
+
 			def schedule
 				schedule = @generator.schedule
 
@@ -52,8 +57,9 @@ module Socrates
 				end
 			end
 
-			def assignments
+			def assignments(type = '')
 				assignments = @generator.assignments
+				@assignments = assignments.list(type)
 			end
 		end
 	end
