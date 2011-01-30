@@ -28,6 +28,10 @@ module Socrates
 			end
 
 			def dates
+				if invocation.start_date == nil or invocation.end_date == nil
+					return []
+				end
+
 				# Get array of Date foo
 				no_class_dates = invocation.no_class
 
@@ -44,6 +48,7 @@ module Socrates
 				# Crazy (terrible) code to rake the yaml file and produce a nice array
 				# consisting of all of the lecture invocation contained in the schedule
 				i = 0
+				all_dates = self.dates
 				@schedule.map do |lecture|
 					result = {}
 					result[:title] = lecture["title"]
@@ -155,22 +160,25 @@ module Socrates
 					end
 
 					# Get a list of class dates
-					result[:date] = self.dates[i]
+					if all_dates != []
+						result[:date] = all_dates[i]
 
-					# Get the "full date"
-					# This is a helper...
-					result[:full_date] = result[:date].strftime("%A, %B ")
-					result[:full_date] += result[:date].strftime("%e").strip
-					append = "th"
-					if result[:date].strftime("%e")[-2] == '1'
-					elsif result[:date].strftime("%e")[-1] == '1'
-						append = "st"
-					elsif result[:date].strftime("%e")[-1] == '2'
-						append = "nd"
-					elsif result[:date].strftime("%e")[-1] == '3'
-						append = "rd"
+						# Get the "full date"
+						# This is a helper...
+						result[:full_date] = result[:date].strftime("%A, %B ")
+						result[:full_date] += result[:date].strftime("%e").strip
+
+						append = "th"
+						if result[:date].strftime("%e")[-2] == '1'
+						elsif result[:date].strftime("%e")[-1] == '1'
+							append = "st"
+						elsif result[:date].strftime("%e")[-1] == '2'
+							append = "nd"
+						elsif result[:date].strftime("%e")[-1] == '3'
+							append = "rd"
+						end
+						result[:full_date] += append + result[:date].strftime(", %Y")
 					end
-					result[:full_date] += append + result[:date].strftime(", %Y")
 
 					if lecture["optional"] != nil and lecture["optional"] == "yes"
 						result[:optional] = true

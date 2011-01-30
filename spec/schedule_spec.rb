@@ -6,8 +6,10 @@ describe Socrates::Models::Schedule do
 		# We need some Invocation model
 		assignments = Socrates::Models::Assignments.load("test/assignments/normal.yml")
 		invocation = Socrates::Models::Invocation.load(assignments, "test/invocation/normal.yml")
+		empty = Socrates::Models::Invocation.load(assignments, "test/invocation/empty.yml")
 		# This represents a common course schedule
 		@normal = Socrates::Models::Schedule.load(invocation, "test/schedule/normal.yml")
+		@empty_invocation = Socrates::Models::Schedule.load(empty, "test/schedule/normal.yml")
 	end
 
 	describe "#lectures" do
@@ -87,6 +89,10 @@ describe Socrates::Models::Schedule do
 	end
 
 	describe "#dates" do
+		it "should return an empty array if course invocation does not specify a date" do
+			@empty_invocation.dates.should eql([])
+		end
+
 		it "should return an array of dates" do
 			@normal.dates.instance_of?(Array).should eql(true)
 			@normal.dates[0].instance_of?(Date).should eql(true)
