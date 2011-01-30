@@ -3,13 +3,15 @@ require 'fileutils'
 module Socrates
 	class << self
 		def invoke(course_path, destination = '.')
-			# Create socrates.yml
+			if course_path[0] != '/'
+				course_path = Dir.getwd + '/' + course_path
+			end
+
+			# Create theme.yml
 			
 			FileUtils.mkdir_p destination
 
-			File.open(destination + '/socrates.yml', 'w') do |f|
-				f.write 'course_path: ' + course_path
-			end
+			FileUtils.cp File.dirname(__FILE__) + '/views/striped/theme.yml', destination + '/theme.yml'
 
 			# Read assignments.yml and create a stub invocation.yml
 
@@ -17,6 +19,7 @@ module Socrates
 			assignments = Socrates::Models::Assignments.load(course_path + '/assignments.yml')
 			File.open(destination + '/invocation.yml', 'w') do |f|
 				f.write "# Invocation Information for " + information.title + "\n"
+				f.write "course path: " + course_path + "\n"
 				f.write "\n"
 				f.write "# Course Information\n"
 				f.write "\n"

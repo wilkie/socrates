@@ -14,9 +14,9 @@ module Socrates
 	# :information - path of information YAML (default: :course_path/information.yml)
 	# :schedule - path of schedule YAML (default: :course_path/schedule.yml)
 	# :assignments - path of assignments YAML (default: :course_path/assignments.yml)
-	# :invocation - path of invocation YAML (default: $CURDIR/invocation.yml)
 	#
-	# :theme - name of the theme to use (default: striped)
+	# :invocation - path of invocation YAML (default: $CURDIR/invocation.yml)
+	# :theme - path of the theme configuration YAML (default: $CURDIR/theme.yml)
 	#
 	# :output - path to output files (default: $CURDIR/output)
 	class << self
@@ -40,9 +40,9 @@ module Socrates
 	# Quickly generates the site from the yaml files and renders
 	# them to the output folder
 	class << self
-		def generate(files = nil)
+		def generate(files = nil, destination = ".")
 			g = new_generator(files)
-			g.generate
+			g.generate(destination)
 		end
 	end
 
