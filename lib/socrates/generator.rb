@@ -80,7 +80,7 @@ module Socrates
 					if f[0] != '.' and not f == "common"
 						if f == "assignments.haml" and traversed == '.'
 							assignments.types.each do |type|
-								puts "Creating " + type + ".html"
+								puts "Creating ./" + type + ".html"
 								foo = render(path + "/" + f, path_to_root, type)
 								commit(foo, dest + "/" + type + ".html")
 							end
@@ -107,7 +107,7 @@ module Socrates
 
 								commit(foo, dest + "/" + filename + "." + new_ext)
 							else
-								puts "Copying " + f
+								puts "Copying " + traversed + "/" + filename + "." + ext
 								FileUtils.cp path + "/" + f, dest + "/" + f
 							end
 						end
@@ -157,7 +157,6 @@ module Socrates
 			# Controller methods for common files
 			@common_files.each do |common|
 				if controller.public_methods.include? common
-					puts "running " + common.to_s
 					controller.send common
 				end
 			end
