@@ -9,6 +9,16 @@ describe Socrates::Models::Invocation do
 		@empty = Socrates::Models::Invocation.load(@assignments, 'test/invocation/empty.yml')
 	end
 
+	describe "#title" do
+		it "returns N/A when the course title is not given in the yaml file" do
+			@empty.title.should eql("N/A")
+		end
+
+		it "returns the course title given in the yaml file" do
+			@normal.title.should eql("Introduction to Programming")
+		end
+	end
+
 	describe "#number" do
 		it "returns N/A when the course number is not given in the yaml file" do
 			@empty.number.should eql("N/A")
