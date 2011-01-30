@@ -49,13 +49,21 @@ module Socrates
 			end
 
 			def start_time
-				time = @invocation["course"]["start time"]
-				Time.new(0, nil, nil, time / 60, time % 60)
+				if @invocation["course"] == nil or @invocation["course"]["start time"] == nil
+					Time.new(0, nil, nil, 0, 0)
+				else
+					time = @invocation["course"]["start time"]
+					Time.new(0, nil, nil, time / 60, time % 60)
+				end
 			end
 
 			def end_time
-				time = @invocation["course"]["end time"]
-				Time.new(0, nil, nil, time / 60, time % 60)
+				if @invocation["course"] == nil or @invocation["course"]["end time"] == nil
+					Time.new(0, nil, nil, 0, 0)
+				else
+					time = @invocation["course"]["end time"]
+					Time.new(0, nil, nil, time / 60, time % 60)
+				end
 			end
 
 			def start_date

@@ -80,6 +80,10 @@ describe Socrates::Models::Invocation do
 	end
 
 	describe "#start_time" do
+		it "should return midnight when the start time is not given" do
+			@empty.start_time.should eql(Time.new(0, nil, nil, 0, 0))
+		end
+
 		it "should return a Time instance" do
 			@normal.start_time.instance_of?(Time).should eql(true)
 		end
@@ -90,6 +94,10 @@ describe Socrates::Models::Invocation do
 	end
 
 	describe "#end_time" do
+		it "should return midnight when the end time is not given" do
+			@empty.end_time.should eql(Time.new(0, nil, nil, 0, 0))
+		end
+
 		it "should return a Time instance" do
 			@normal.end_time.instance_of?(Time).should eql(true)
 		end
