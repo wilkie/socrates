@@ -27,7 +27,7 @@ module Socrates
 				f.write "# Anywhere there is an array, you may specify as many items as you'd like\n"
 				f.write "\n"
 				f.write "course:\n"
-				f.write "#  title: " + information.title + "\n"
+				f.write "  title: " + information.title + "\n"
 				f.write "#  teacher: John Smith\n"
 				f.write "#  teachers: [John Smith, Jane Smith]\n"
 				f.write "#  assistant: John Smith\n"
