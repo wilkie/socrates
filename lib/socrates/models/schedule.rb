@@ -1,4 +1,4 @@
-require_relative 'invocation'
+require 'socrates/models/invocation'
 
 module Socrates
 	module Models

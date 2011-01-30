@@ -1,7 +1,7 @@
-require_relative '../models/information'
-require_relative '../models/schedule'
+require 'socrates/models/information'
+require 'socrates/models/schedule'
 
-require_relative '../generator'
+require 'socrates/generator'
 
 module Socrates
 	module Controllers

@@ -1,6 +1,6 @@
 require 'yaml'
 
-require_relative 'assignments'
+require 'socrates/models/assignments'
 
 module Socrates
 	module Models

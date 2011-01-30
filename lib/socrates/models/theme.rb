@@ -1,3 +1,5 @@
+require 'yaml'
+
 module Socrates
 	module Models
 		class Theme

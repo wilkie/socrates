@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/socrates'
-require_relative '../lib/socrates/cli'
+$: << '../lib'
+
+require 'socrates'
+require 'socrates/cli'
 
 Socrates::CLI.run

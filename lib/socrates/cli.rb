@@ -1,4 +1,4 @@
-require_relative '../socrates'
+require 'socrates'
 require 'optparse'
 
 module Socrates

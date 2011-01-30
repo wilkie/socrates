@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'yaml'
 
-require_relative 'socrates/generator'
-require_relative 'socrates/invoke'
+require 'socrates/generator'
+require 'socrates/invoke'
 
 module Socrates
 	class << self

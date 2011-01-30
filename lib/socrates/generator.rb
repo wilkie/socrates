@@ -1,12 +1,12 @@
 require 'tilt'
 
-require_relative 'models/information'
-require_relative 'models/schedule'
-require_relative 'models/assignments'
-require_relative 'models/invocation'
-require_relative 'models/theme'
+require 'socrates/models/information'
+require 'socrates/models/schedule'
+require 'socrates/models/assignments'
+require 'socrates/models/invocation'
+require 'socrates/models/theme'
 
-require_relative 'controllers/site_controller.rb'
+require 'socrates/controllers/site_controller'
 
 module Socrates
 	class Generator
@@ -28,22 +28,22 @@ module Socrates
 
 			if not Socrates.settings.keys.include? :course_path
 				if @config["course path"]
-					course_path = @config["course path"]
+					@course_path = @config["course path"]
 				else
-					course_path = '.'
+					@course_path = '.'
 				end
 			else
-				course_path = Socrates.settings[:course_path]
+				@course_path = Socrates.settings[:course_path]
 			end
 
 			if not files.keys.include? :information
-				files[:information] = course_path + '/information.yml'
+				files[:information] = @course_path + '/information.yml'
 			end
 			if not files.keys.include? :schedule
-				files[:schedule] = course_path + '/schedule.yml'
+				files[:schedule] = @course_path + '/schedule.yml'
 			end
 			if not files.keys.include? :assignments
-				files[:assignments] = course_path + '/assignments.yml'
+				files[:assignments] = @course_path + '/assignments.yml'
 			end
 
 			@assignments = Models::Assignments.load(files[:assignments])
@@ -117,6 +117,9 @@ module Socrates
 
 			# Rake the rest of the files
 			traverse(@theme_path, destination)
+
+			# Rake course files
+			traverse(@course_path, destination)
 		end
 
 		def commit(output, path)
@@ -177,10 +180,10 @@ module Socrates
 				content = @header + "\n" + @header_indent
 
 				if ext == "md"
-					content = content + ":markdown"
+					content = content + ".markdown" + "\n" + @header_indent + "  " + ":markdown"
 					md_content = File.read(file)
 					content = content + md_content.lines.inject("") do |result, line|
-						result + "\n" + @header_indent + "  " + line
+						result + "\n" + @header_indent + "    " + line
 					end
 				else
 					content = content + "= Tilt::HamlTemplate.new('#{file}').render self"
