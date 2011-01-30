@@ -21,7 +21,6 @@ module Socrates
 				@@instances[key]
 			end
 
-			private :load
 			def load(invocation, configuration_file)
 				@invocation = invocation
 				@schedule = YAML.load_file(configuration_file)

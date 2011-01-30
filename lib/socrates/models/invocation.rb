@@ -23,7 +23,6 @@ module Socrates
 				@@instances[key]
 			end
 
-			private :load
 			def load(assignments, configuration_file)
 				@invocation = YAML.load_file(configuration_file)
 				@configuration_file = configuration_file
@@ -120,9 +119,18 @@ module Socrates
 				@invocation["course"]["no class"]
 			end
 
+			def course_path
+				if @invocation["course path"] == nil
+					'.'
+				else
+					@invocation["course path"]
+				end
+			end
+
 			def types
 				foo = @invocation.keys
 				foo.delete("course")
+				foo.delete("course path")
 				foo
 			end
 

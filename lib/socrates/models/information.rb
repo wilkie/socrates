@@ -19,7 +19,6 @@ module Socrates
 				@@instances[configuration_file]
 			end
 
-			private :load
 			def load(configuration_file)
 				@config = YAML.load_file(configuration_file)
 				@configuration_file = configuration_file
