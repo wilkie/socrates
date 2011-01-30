@@ -57,22 +57,25 @@ module Socrates
 		def generate(destination = '.')
 			# Render
 
-			theme_path = File.dirname(__FILE__) + '/views/' + @theme.name
+			@theme_path = File.dirname(__FILE__) + '/views/' + @theme.name
 
 			# Common Files
 			@common_files = []
-			Dir.new(theme_path + "/common").each do |f|
-				if f[0] != '.' and not File.directory?(theme_path + "/common/" + f)
+			Dir.new(@theme_path + "/common").each do |f|
+				if f[0] != '.' and not File.directory?(@theme_path + "/common/" + f)
 					filename = f[0..f.rindex('.')-1]
 					@common_files << filename.intern
 				end
 			end
 
-			load_common(theme_path + "/common/header.haml", theme_path + "/common/footer.haml")
+			load_common(@theme_path + "/common/header.haml", @theme_path + "/common/footer.haml")
 
 			def traverse(start_path, start_dest, traversed = '.')
 				path = start_path + "/" + traversed
 				dest = start_dest + "/" + traversed
+
+				path_to_root = "../" * traversed.count('/')
+
 				Dir.new(path).each do |f|
 					if f[0] != '.' and not f == "common"
 						if File.directory?(path + "/" + f)
@@ -94,7 +97,9 @@ module Socrates
 
 							if new_ext != ext
 								puts "Creating " + traversed + "/" + filename + "." + new_ext
-								foo = render(path + "/" + f)
+								foo = render(path + "/" + f, path_to_root)
+
+								commit(foo, dest + "/" + filename + "." + new_ext)
 							else
 								puts "Copying " + f
 								FileUtils.cp path + "/" + f, dest + "/" + f
@@ -105,7 +110,7 @@ module Socrates
 			end
 
 			# Rake the rest of the files
-			traverse(theme_path, destination)
+			traverse(@theme_path, destination)
 		end
 
 		def commit(output, path)
@@ -123,12 +128,12 @@ module Socrates
 			@header_indent = @header[start_index..@header.index(/\S/, start_index)-1]
 
 			# footer file
-			@footer = "= Tile::HamlTemplate.new('common/footer.haml').render self"
+			@footer = "= Tilt::HamlTemplate.new(@theme_path + '/common/footer.haml').render self"
 		end
 		private :load_common
 		
-		def render(file)
-			controller = Socrates::Controllers::SiteController.new(self)
+		def render(file, path)
+			controller = Socrates::Controllers::SiteController.new(self, '', path, @theme_path)
 
 			# Controller methods for common files
 			@common_files.each do |common|
@@ -139,8 +144,10 @@ module Socrates
 
 			# Render the file
 			filename = file[0..file.rindex('.') - 1]
+			filename = filename[filename.rindex('/')+1..-1]
 			ext = file[file.rindex('.')+1..-1]
 
+			p filename.intern
 			if controller.public_methods.include? filename.intern
 				controller.send filename.intern
 			end

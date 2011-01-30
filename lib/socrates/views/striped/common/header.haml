@@ -6,10 +6,10 @@
     - else
       %title= @course[:number]
 
-    %link{:rel => "stylesheet", :href => @prepend_path + "css/main.css", :type => "text/css"}
+    %link{:rel => "stylesheet", :href => @path + "css/main.css", :type => "text/css"}
   %body
 
     / Navigation Bar
-    = Tilt::HamlTemplate.new('common/navigation.haml').render
+    = Tilt::HamlTemplate.new(@theme_path + '/common/navigation.haml').render
 
     / Content Begins Below

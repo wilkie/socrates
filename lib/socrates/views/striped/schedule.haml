@@ -8,13 +8,18 @@
       -# Date
       %td.lecture_date_cell
         .lecture_date_box
-          .lecture_date_box_month= lecture[:date].strftime("%b")[0..2]
-          .lecture_date_box_day= lecture[:date].strftime("%d")
-          .lecture_date_box_wday= lecture[:date].strftime("%A")[0..2]
+          -if lecture[:date] == nil
+            .lecture_date_box_month
+            .lecture_date_box_day= '#' + @lectures.index(lecture).to_s
+            .lecture_date_box_wday
+          -else
+            .lecture_date_box_month= lecture[:date].strftime("%b")[0..2]
+            .lecture_date_box_day= lecture[:date].strftime("%d")
+            .lecture_date_box_wday= lecture[:date].strftime("%A")[0..2]
 
       %td.lecture_info_cell
         .lecture_title
-          %a{:name => "#{lecture[:date].strftime("%b_%d_%A")}"}= lecture[:title]
+          %a{:name => "lecture_#{@lectures.index(lecture)}"}= lecture[:title]
         .lecture_description
           = lecture[:description]
         .lecture_info
