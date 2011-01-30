@@ -128,6 +128,10 @@ describe Socrates::Models::Invocation do
 	end
 
 	describe "#days" do
+		it "should give an empty array when days is not given" do
+			@empty.days.should eql([])
+		end
+
 		it "should give an array of values representing the days it meets where 0 is sunday" do
 			@normal.days.should eql([1,3])
 		end

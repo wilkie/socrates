@@ -107,6 +107,10 @@ module Socrates
 			end
 
 			def days
+				if @invocation["course"] == nil or @invocation["course"]["days"] == nil
+					return []
+				end
+
 				if not @invocation["course"]["days"].instance_of? Array
 					@invocation["course"]["days"] = [@invocation["course"]["days"]]
 				end
