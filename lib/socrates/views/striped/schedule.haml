@@ -1,0 +1,74 @@
+/ Course Schedule Follows
+%table
+  - @lectures.each do |lecture|
+    -# The newline is to circumvent a Haml bug involving ruby interpolation
+    /
+      Lecture for #{lecture[:full_date]}
+    %tr
+      -# Date
+      %td.lecture_date_cell
+        .lecture_date_box
+          .lecture_date_box_month= lecture[:date].strftime("%b")[0..2]
+          .lecture_date_box_day= lecture[:date].strftime("%d")
+          .lecture_date_box_wday= lecture[:date].strftime("%A")[0..2]
+
+      %td.lecture_info_cell
+        .lecture_title
+          %a{:name => "#{lecture[:date].strftime("%b_%d_%A")}"}= lecture[:title]
+        .lecture_description
+          = lecture[:description]
+        .lecture_info
+          - unless lecture[:slides].size == 0
+            / Slides
+            %table
+              %tr
+                %td.lecture_item_cell
+                  %img{:src => "img/pdf.png"}
+                %td.lecture_item_content
+                  %ul
+                    - lecture[:slides].each do |slide|
+                      %li
+                        - if slide[:files].size == 1 and slide[:files][0][:title] == ""
+                          %a{:href => "#{slide[:files][0][:href]}", :alt => "#{slide[:title]}"}= slide[:title]
+                        - else
+                          = slide[:title] + " - "
+                          - slide[:files].each do |file|
+                            %a{:href => "#{file[:href]}", :alt => "#{slide[:title]}" + " - " + "#{file[:title]}"}= file[:title]
+          - unless lecture[:notes].size == 0
+            / Notes
+            %table
+              %tr
+                %td.lecture_item_cell
+                  %img{:src => "img/notes.png"}
+                %td.lecture_item_content
+                  %ul
+                    - lecture[:notes].each do |note|
+                      %li
+                        - if note[:files].size == 1 and note[:files][0][:title] == ""
+                          %a{:href => "#{note[:files][0][:href]}", :alt => "#{note[:title]}"}= note[:title]
+                        - else
+                          = note[:title] + " - "
+                          - note[:files].each do |file|
+                            %a{:href => "#{file[:href]}", :alt => "#{note[:title]}" + " - " + "#{file[:title]}"}= file[:title]
+          - unless lecture[:links].size == 0
+            / Links
+            %table
+              %tr
+                %td.lecture_item_cell
+                  %img{:src => "img/links.png"}
+                %td.lecture_item_content
+                  %ul
+                    - lecture[:links].each do |link|
+                      %li
+                        %a{:alt => "Link to " + "#{link[:title]}", :href => "#{link[:href]}", :target => "_blank"}= link[:title]
+          - unless lecture[:videos].size == 0
+            / Videos
+            %table
+              %tr
+                %td.lecture_item_cell
+                  %img{:src => "img/videos.png"}
+                %td.lecture_item_content
+                  %ul
+                    - lecture[:videos].each do |video|
+                      %li
+                        %a{:alt => "Link to " + "#{video[:title]}", :href => "#{video[:href]}", :target => "_blank"}= video[:title]

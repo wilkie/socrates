@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    - if @title != nil
+      %title= @course[:number] + " - " + @title
+    - else
+      %title= @course[:number]
+
+    %link{:rel => "stylesheet", :href => @prepend_path + "css/main.css", :type => "text/css"}
+  %body
+
+    / Navigation Bar
+    = Tilt::HamlTemplate.new('common/navigation.haml').render
+
+    / Content Begins Below
