@@ -1,5 +1,6 @@
 / Main Information
-%h2 Main Information
+.section_title
+  %a{:name => "main"} Main Information
 
 %table
 
@@ -20,7 +21,8 @@
 / Teaching Assistants
 -unless @course[:assistants].size == 0
 
-  %h2 Teaching Assistants
+  .section_title
+    %a{:name => "TA"} Teaching Assistants
 
   %table
     -@course[:assistants].each do |assistant|
@@ -28,4 +30,5 @@
         %td= assistant
 
 / Syllabus
-%h2 Syllabus
+.section_title
+  %a{:name => "Syllabus"} Syllabus
