@@ -1,3 +1,4 @@
-output
-*~
-*.swp
+*.gem
+.bundle
+Gemfile.lock
+pkg/*
