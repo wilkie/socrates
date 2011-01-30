@@ -17,6 +17,21 @@ a[href]
   &:visited
     color: #205b8e
 
+.header
+  text-align: center
+  background-image: url('../img/date_bg.png')
+  color: #7A7499
+  border: 2px solid #A09BBD
+  margin-bottom: 3px
+  margin-top: 10px
+  font-size: 3em
+  @include rounded(topleft)
+  @include rounded(topright)
+  @include rounded(bottomleft)
+  @include rounded(bottomright)
+  p
+    margin: 9px
+
 .lecture_date_cell
   vertical-align: top
   padding-right: 35px

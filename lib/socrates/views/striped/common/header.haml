@@ -8,6 +8,9 @@
 
     %link{:rel => "stylesheet", :href => @path + "css/main.css", :type => "text/css"}
   %body
+    .header
+      %p
+        =@course[:title]
 
     / Navigation Bar
     = Tilt::HamlTemplate.new(@theme_path + '/common/navigation.haml').render
