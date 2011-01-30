@@ -1,3 +1,5 @@
+@import "reset"
+
 @mixin rounded($side, $radius: 10px)
   border-#{$side}-radius: $radius
   -moz-border-radius-#{$side}: $radius
@@ -6,6 +8,8 @@
 body
   background-color: gray
   background-image: url('../img/bg.png')
+  font-size: 16px
+  font-family: serif, times
   margin:
     left: 30px
     right: 30px
@@ -124,3 +128,11 @@ a[href]
 
 .lecture_info
   padding-bottom: 15px
+
+.markdown
+  h1
+    font-family: serif
+    font-weight: normal
+    margin-top: 1px
+    font-size: 1.6em
+    color: #104b7e
