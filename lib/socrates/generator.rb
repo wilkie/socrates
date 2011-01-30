@@ -78,7 +78,7 @@ module Socrates
 
 				Dir.new(path).each do |f|
 					if f[0] != '.' and not f == "common"
-						if f == "assignments.haml" and traversed = '.'
+						if f == "assignments.haml" and traversed == '.'
 							assignments.types.each do |type|
 								puts "Creating " + type + ".html"
 								foo = render(path + "/" + f, path_to_root, type)

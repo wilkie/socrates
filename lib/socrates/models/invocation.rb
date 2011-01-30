@@ -178,6 +178,10 @@ module Socrates
 			end
 
 			def list(type)
+				if @invocation[type] == nil
+					return []
+				end
+
 				data = self.assignments.list(type)
 				@invocation[type].map do |hash|
 					result = {}

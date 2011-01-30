@@ -180,6 +180,12 @@ describe Socrates::Models::Invocation do
 	end
 
 	describe "#list" do
+		it "should return an empty array if nothing is listed in the yaml file" do
+			@empty.types.each do |type|
+				@empty.list(type).should eql([])
+			end
+		end
+
 		it "should yield the items given by the yaml file" do
 			@normal.list("homework").should eql([
 				{ :title => "Picobot", :description => "Solving some Picobot puzzles", :href => "homework/hw1",

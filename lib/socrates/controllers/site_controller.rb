@@ -24,7 +24,6 @@ module Socrates
 
 			def navigation
 				@assignment_types = @generator.invocation.types
-				p @assignment_types
 			end
 
 			def schedule
@@ -43,7 +42,6 @@ module Socrates
 				@course[:end_date] = invocation.end_date
 				@course[:start_time] = invocation.start_time
 				@course[:end_time] = invocation.end_time
-				p @course
 
 				@course[:days] = invocation.days.inject("") do |result, num|
 					# A date that is Sunday
@@ -58,7 +56,7 @@ module Socrates
 			end
 
 			def assignments(type = '')
-				assignments = @generator.assignments
+				assignments = @generator.invocation
 				@assignments = assignments.list(type)
 			end
 		end
