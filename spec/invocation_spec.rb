@@ -6,9 +6,14 @@ describe Socrates::Models::Invocation do
 	before(:each) do
 		@assignments = Socrates::Models::Assignments.load('test/assignments/normal.yml')
 		@normal = Socrates::Models::Invocation.load(@assignments, 'test/invocation/normal.yml')
+		@empty = Socrates::Models::Invocation.load(@assignments, 'test/invocation/empty.yml')
 	end
 
 	describe "#number" do
+		it "returns N/A when the course number is not given in the yaml file" do
+			@empty.number.should eql("N/A")
+		end
+
 		it "returns the course number given in the yaml file" do
 			@normal.number.should eql("CS 0007")
 		end

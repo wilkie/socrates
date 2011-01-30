@@ -10,7 +10,13 @@ require_relative 'controllers/site_controller.rb'
 
 module Socrates
 	class Generator
-		def initialize(files)
+		attr_reader :information
+		attr_reader :assignments
+		attr_reader :invocation
+		attr_reader :theme
+		attr_reader :schedule
+
+		def initialize(files = {})
 			if not files.keys.include? :invocation
 				files[:invocation] = './invocation.yml'
 			end
@@ -122,7 +128,7 @@ module Socrates
 		private :load_common
 		
 		def render(file)
-			controller = SiteController.new
+			controller = SiteController.new(self)
 
 			# Controller methods for common files
 			@common_files.each do |common|

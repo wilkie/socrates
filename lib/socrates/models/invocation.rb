@@ -25,16 +25,27 @@ module Socrates
 
 			def load(assignments, configuration_file)
 				@invocation = YAML.load_file(configuration_file)
+				if @invocation == false
+					@invocation = {}
+				end
 				@configuration_file = configuration_file
 				@assignments = assignments
 			end
 
 			def title
-				@invocation["course"]["title"]
+				if @invocation["course"] == nil or @invocation["course"]["title"] == nil
+					"N/A"
+				else
+					@invocation["course"]["title"]
+				end
 			end
 
 			def number
-				@invocation["course"]["number"]
+				if @invocation["course"] == nil or @invocation["course"]["number"] == nil
+					"N/A"
+				else
+					@invocation["course"]["number"]
+				end
 			end
 
 			def start_time
