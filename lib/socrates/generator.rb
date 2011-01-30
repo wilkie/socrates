@@ -133,7 +133,16 @@ module Socrates
 		private :load_common
 		
 		def render(file, path)
-			controller = Socrates::Controllers::SiteController.new(self, '', path, @theme_path)
+			filename = file[0..file.rindex('.') - 1]
+			filename = filename[filename.rindex('/')+1..-1]
+			ext = file[file.rindex('.')+1..-1]
+
+			title = filename.split('_').inject("") do |result, word|
+				result + word.capitalize + " "
+			end
+			title.strip!
+
+			controller = Socrates::Controllers::SiteController.new(self, title, path, @theme_path)
 
 			# Controller methods for common files
 			@common_files.each do |common|
@@ -143,11 +152,6 @@ module Socrates
 			end
 
 			# Render the file
-			filename = file[0..file.rindex('.') - 1]
-			filename = filename[filename.rindex('/')+1..-1]
-			ext = file[file.rindex('.')+1..-1]
-
-			p filename.intern
 			if controller.public_methods.include? filename.intern
 				controller.send filename.intern
 			end
