@@ -2,9 +2,9 @@
 require_relative '../lib/socrates/controllers/site_controller'
 require_relative '../lib/socrates/generator'
 
-describe SiteController do
+describe Socrates::Controllers::SiteController do
 	before(:each) do
-		@controller = SiteController.new(nil)
+		@controller = Socrates::Controllers::SiteController.new(nil)
 	end
 
 	describe "#schedule" do

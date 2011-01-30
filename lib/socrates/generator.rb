@@ -128,7 +128,7 @@ module Socrates
 		private :load_common
 		
 		def render(file)
-			controller = SiteController.new(self)
+			controller = Socrates::Controllers::SiteController.new(self)
 
 			# Controller methods for common files
 			@common_files.each do |common|
