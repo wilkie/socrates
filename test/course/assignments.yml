@@ -1,25 +1,25 @@
 homework:
   - title: Picobot
     description: Solving some Picobot puzzles
-    href: homework/hw1
+    href: homework/hw1.html
   - title: ISP
     description: Billing program for a good-natured ISP
-    href: homework/hw2
+    href: homework/hw2.html
   - title: A Simple Title
     description: A short introduction to the nature of the assignment
-    href: homework/hw3
+    href: homework/hw3.html
 
 labs:
   - title: Picobot
     description: Playing around with the Picobot
-    href: labs/picobot
+    href: labs/picobot.html
   - title: Calorie Counter
     description: Writing a program to track diet statistics that do not matter
-    href: labs/calorie_counter
+    href: labs/calorie_counter.html
 
 projects:
   - title: Blackjack
     description: A game that you can win almost half of the time
-    href: projects/blackjack
+    href: projects/blackjack.html
   - title: One Time Pad
     description: Passing notes such that nobody can read them was never easier
