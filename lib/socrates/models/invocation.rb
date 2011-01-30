@@ -50,7 +50,7 @@ module Socrates
 
 			def start_time
 				if @invocation["course"] == nil or @invocation["course"]["start time"] == nil
-					Time.new(0, nil, nil, 0, 0)
+					nil
 				else
 					time = @invocation["course"]["start time"]
 					Time.new(0, nil, nil, time / 60, time % 60)
@@ -59,7 +59,7 @@ module Socrates
 
 			def end_time
 				if @invocation["course"] == nil or @invocation["course"]["end time"] == nil
-					Time.new(0, nil, nil, 0, 0)
+					nil
 				else
 					time = @invocation["course"]["end time"]
 					Time.new(0, nil, nil, time / 60, time % 60)
@@ -67,11 +67,19 @@ module Socrates
 			end
 
 			def start_date
-				@invocation["course"]["start date"]
+				if @invocation["course"] == nil or @invocation["course"]["start date"] == nil
+					nil
+				else
+					@invocation["course"]["start date"]
+				end
 			end
 
 			def end_date
-				@invocation["course"]["end date"]
+				if @invocation["course"] == nil or @invocation["course"]["end date"] == nil
+					nil
+				else
+					@invocation["course"]["end date"]
+				end
 			end
 
 			def assistants
@@ -143,6 +151,10 @@ module Socrates
 			end
 
 			def no_class
+				if @invocation["course"] == nil or @invocation["course"]["no class"] == nil
+					return []
+				end
+
 				if not @invocation["course"]["no class"].instance_of? Array
 					@invocation["course"]["no class"] = [@invocation["course"]["no class"]]
 				end

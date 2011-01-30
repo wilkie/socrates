@@ -88,8 +88,8 @@ describe Socrates::Models::Invocation do
 	end
 
 	describe "#start_time" do
-		it "should return midnight when the start time is not given" do
-			@empty.start_time.should eql(Time.new(0, nil, nil, 0, 0))
+		it "should return nil when the start time is not given" do
+			@empty.start_time.should eql(nil)
 		end
 
 		it "should return a Time instance" do
@@ -102,8 +102,8 @@ describe Socrates::Models::Invocation do
 	end
 
 	describe "#end_time" do
-		it "should return midnight when the end time is not given" do
-			@empty.end_time.should eql(Time.new(0, nil, nil, 0, 0))
+		it "should return nil when the end time is not given" do
+			@empty.end_time.should eql(nil)
 		end
 
 		it "should return a Time instance" do
@@ -116,6 +116,10 @@ describe Socrates::Models::Invocation do
 	end
 
 	describe "#end_date" do
+		it "should return nil when a date is not given" do
+			@empty.end_date.should eql(nil)
+		end
+
 		it "should return a Date instance" do
 			@normal.end_date.instance_of?(Date).should eql(true)
 		end
@@ -126,6 +130,10 @@ describe Socrates::Models::Invocation do
 	end
 	
 	describe "#start_date" do
+		it "should return nil when a date is not given" do
+			@empty.start_date.should eql(nil)
+		end
+
 		it "should return a Date instance" do
 			@normal.start_date.instance_of?(Date).should eql(true)
 		end
@@ -151,6 +159,10 @@ describe Socrates::Models::Invocation do
 	end
 
 	describe "#no_class" do
+		it "should return an empty array if no dates are given" do
+			@empty.no_class.should eql([])
+		end
+
 		it "should give an array of Date instances" do
 			@normal.no_class.instance_of?(Array).should eql(true)
 			@normal.no_class[0].instance_of?(Date).should eql(true)
