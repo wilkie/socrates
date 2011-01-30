@@ -56,6 +56,10 @@ describe Socrates::Models::Invocation do
 
 	# It is lenient about the plurization of the term and whether or not the value is plural
 	describe "#teachers" do
+		it "returns an empty array when teachers are not given in the yaml file" do
+			@empty.teachers.should eql([])
+		end
+
 		it "returns the teachers that are given in the yaml file when one is listed as teacher" do
 			invocation = Socrates::Models::Invocation.load(@assignments, "test/invocation/single_teacher.yml")
 			invocation.teachers[0].should eql("Dave Wilkinson")

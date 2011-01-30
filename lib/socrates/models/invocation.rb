@@ -91,7 +91,9 @@ module Socrates
 			end
 
 			def teachers
-				if @invocation["course"]["teacher"] != nil 
+				if @invocation["course"] == nil
+					return []
+				elsif @invocation["course"]["teacher"] != nil 
 					if @invocation["course"]["teacher"].instance_of? Array
 						return @invocation["course"]["teacher"]
 					else
@@ -103,6 +105,8 @@ module Socrates
 					else
 						return [@invocation["course"]["teachers"]]
 					end
+				else
+					return []
 				end
 			end
 
