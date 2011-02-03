@@ -1,6 +1,30 @@
 = socrates
 
+Simply run socrates to see a USAGE listing.
+
+The three commands and their typical usage is explained below.
+
+=== Trying it out ===
+
+If you would like to try out the generator, you can invoke the test course.
+
+ socrates invoke test/course my-course
+
+Then, change directories to my-course and look at the invocation.yml. Edit this, if you'd like, and then generate!
+
+ socrates generate
+
+=== Making your own course
+
+To set up a scaffold for a new course, simply use the scaffold command.
+
+ socrates scaffold my-awesome-course
+
+This will create a directory called 'my-awesome-course' with some sample configuration files that describe that course. When a course is invoked later, any content (md, haml, etc) in this course directory will also be raked and translated with the generation. Therefore, a course designer may simply place any materials (images) in this directory and they will be copied to the generated output. Furthermore, any write-ups in the course may use markdown. (See test/course/labs/picobot.md for an example)
+
 == Contributing to socrates
+
+Fork away!
  
 == Copyright
 
