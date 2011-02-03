@@ -1,7 +1,7 @@
 homework:
   - title: Picobot
     description: Solving some Picobot puzzles
-    href: homework/hw1.html
+    href: homework/picobot.html
   - title: ISP
     description: Billing program for a good-natured ISP
     href: homework/hw2.html
