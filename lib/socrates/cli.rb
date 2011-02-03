@@ -23,7 +23,7 @@ module Socrates
 		USAGE
 
 		class << self
-			def set_options
+			def parse_options
 				@opts = OptionParser.new do |opts|
 					opts.banner = BANNER.gsub(/^\t{2}/, '')
 
@@ -40,11 +40,16 @@ module Socrates
 			end
 
 			def run
-				set_options
+				begin
+					parse_options
+				rescue OptionParser::InvalidOption => e
+					warn e
+					exit -1
+				end
 
 				def fail
 					puts @opts
-					exit
+					exit -1
 				end
 
 				if ARGV.empty?
@@ -58,6 +63,10 @@ module Socrates
 					dest = ARGV[2] unless not ARGV[2]
 					Socrates.invoke(ARGV[1], dest)
 				when 'scaffold'
+					fail unless ARGV[1]
+					dest = '.'
+					dest = ARGV[1]
+					Socrates.scaffold(dest)
 				when 'generate'
 					dest = '.'
 					dest = ARGV[1] unless not ARGV[1]

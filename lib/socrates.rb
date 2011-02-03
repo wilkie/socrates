@@ -3,6 +3,7 @@ require 'yaml'
 
 require 'socrates/generator'
 require 'socrates/invoke'
+require 'socrates/scaffold'
 
 module Socrates
 	class << self
@@ -31,10 +32,6 @@ module Socrates
 				end
 			end
 		end
-	end
-
-	# Creates empty examples files for a class invocation
-	class << self
 	end
 
 	# Quickly generates the site from the yaml files and renders
