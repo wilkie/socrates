@@ -196,13 +196,15 @@ module Socrates
       when 'sass', 'scss'
         template = Tilt.new(file)
       when 'slides'
-        content = @slide_header + "\n" + @slide_header_indent
+        content = @slide_header
 
-        content = content + ".markdown" + "\n" + @slide_header_indent + "  " + ":markdown"
+        content = content + "\n" + @slide_header_indent + ":markdown"
         md_content = File.read(file)
         content = content + md_content.lines.inject("") do |result, line|
-          result + "\n" + @slide_header_indent + "    " + line
+          result + "\n" + @slide_header_indent + "  " + line
         end
+
+        content = content + "\n" + @slide_header_indent + "=\"</div>\""
 
         content = content + "\n" + @slide_header_indent + @slide_footer
 
@@ -233,7 +235,35 @@ module Socrates
         return
       end
 
-      template.render controller
+      ret = template.render controller
+
+      # slide finalize
+      if ext == 'slides'
+        first = true
+        id = 0
+        ret.gsub! /<h(\d)>/ do |match|
+          r = ""
+          if first
+            r = "<div class='slide'><h#{$1} id=#{id}>"
+          else
+            r = "</div><div class='slide'><h#{$1} id=#{id}>"
+          end
+          first = false
+          id += 1
+
+          r
+        end
+
+        ret.gsub! /(<li>)?<([^>]+?)>\s*\[wait\]\s*/ do |match|
+          if $1 == "<li>"
+            "<li class='slide'><#{$2}>"
+          else
+            "<#{$2} class='slide'>"
+          end
+        end
+      end
+
+      ret
     end
     private :render
   end
