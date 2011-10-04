@@ -6,8 +6,6 @@
     - else
       %title= @course[:number]
 
-    %link{:rel => "stylesheet", :href => "#{@path}css/main.css", :type => "text/css"}
-    
     %link{:rel => "stylesheet", :href => "#{@path}css/deck.core.css", :type => "text/css"}
     %link{:rel => "stylesheet", :href => "#{@path}css/deck.goto.css", :type => "text/css"}
     %link{:rel => "stylesheet", :href => "#{@path}css/deck.status.css", :type => "text/css"}
@@ -15,9 +13,16 @@
     %link{:rel => "stylesheet", :href => "#{@path}css/deck.hash.css", :type => "text/css"}
     %link{:rel => "stylesheet", :href => "#{@path}css/deck.menu.css", :type => "text/css"}
 
+    / Deck Style
     %link{:rel => "stylesheet", :href => "#{@path}css/web-2.0.css", :type => "text/css"}
+
+    / Deck Transition
+    %link{:rel => "stylesheet", :href => "#{@path}css/fade.css", :type => "text/css"}
+    
+    %link{:rel => "stylesheet", :href => "#{@path}css/main.css", :type => "text/css"}
     
     %script{:src => "#{@path}js/modernizr.custom.js"}
 
-  %body.deck-container
-    / Content Begins Below
+  %body
+    .deck-container
+      / Content Begins Below

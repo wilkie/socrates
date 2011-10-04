@@ -155,8 +155,15 @@ module Socrates
       @slide_header_indent = @slide_header[start_index..@slide_header.index(/\S/, start_index)-1]
 
       # footer file
-      @footer = "= Tilt::HamlTemplate.new('#{footer_file}').render self"
-      @slide_footer = "= Tilt::HamlTemplate.new('#{slide_footer_file}').render self"
+      @footer = File.read(footer_file)
+      @footer = @footer.lines.inject("") do |result, line|
+        result + "\n" + @header_indent[0..-3] + line
+      end
+
+      @slide_footer = File.read(slide_footer_file)
+      @slide_footer = @slide_footer.lines.inject("") do |result, line|
+        result + "\n" + @slide_header_indent[0..-3] + line
+      end
     end
     private :load_common
     
@@ -227,6 +234,7 @@ module Socrates
 
         content = content + "\n" + @header_indent + @footer
 
+        puts content
         template = Tilt::HamlTemplate.new(nil, 1, {:format => :html5}) do
           content
         end
@@ -244,9 +252,9 @@ module Socrates
         ret.gsub! /<h(\d)>/ do |match|
           r = ""
           if first
-            r = "<div class='slide'><h#{$1} id=#{id}>"
+            r = "<div class='slide' id='#{id}'><h#{$1}>"
           else
-            r = "</div><div class='slide'><h#{$1} id=#{id}>"
+            r = "</div><div class='slide' id='#{id}'><h#{$1}>"
           end
           first = false
           id += 1
