@@ -15,12 +15,9 @@
     %link{:rel => "stylesheet", :href => "#{@path}css/deck.hash.css", :type => "text/css"}
     %link{:rel => "stylesheet", :href => "#{@path}css/deck.menu.css", :type => "text/css"}
 
+    %link{:rel => "stylesheet", :href => "#{@path}css/web-2.0.css", :type => "text/css"}
+    
+    %script{:src => "#{@path}js/modernizr.custom.js"}
+
   %body.deck-container
-    .header
-      %p
-        =@course[:title]
-
-    / Navigation Bar
-    = Tilt::HamlTemplate.new(@theme_path + '/common/navigation.haml').render self
-
     / Content Begins Below
