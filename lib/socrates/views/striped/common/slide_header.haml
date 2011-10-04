@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    - if @title != nil
+      %title= @course[:number] + " - " + @title
+    - else
+      %title= @course[:number]
+
+    %link{:rel => "stylesheet", :href => "#{@path}css/main.css", :type => "text/css"}
+    
+    %link{:rel => "stylesheet", :href => "#{@path}css/deck.core.css", :type => "text/css"}
+    %link{:rel => "stylesheet", :href => "#{@path}css/deck.goto.css", :type => "text/css"}
+    %link{:rel => "stylesheet", :href => "#{@path}css/deck.status.css", :type => "text/css"}
+    %link{:rel => "stylesheet", :href => "#{@path}css/deck.navigation.css", :type => "text/css"}
+    %link{:rel => "stylesheet", :href => "#{@path}css/deck.hash.css", :type => "text/css"}
+    %link{:rel => "stylesheet", :href => "#{@path}css/deck.menu.css", :type => "text/css"}
+
+  %body.deck-container
+    .header
+      %p
+        =@course[:title]
+
+    / Navigation Bar
+    = Tilt::HamlTemplate.new(@theme_path + '/common/navigation.haml').render self
+
+    / Content Begins Below

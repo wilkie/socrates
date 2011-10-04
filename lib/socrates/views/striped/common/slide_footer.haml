@@ -1,0 +1,26 @@
+/ Content Ended
+
+/ Deck
+%a.deck-prev-link{:href => "#", :title => "Previous"}="&#8592;"
+%a.deck-next-link{:href => "#", :title => "Next"}="&#8594;"
+
+%p.deck-status
+  %span.deck-status-current
+  ="/"
+  %span.deck-status-total
+
+%form.goto-form
+  %label{:for => "goto-slide"}Go to slide:
+  %input#goto-slide{:type => "number", :name => "slidenum"}
+  %input{:type => "submit", :value => "Go"}
+
+%a.deck-permalink{:href => ".", :title => "Permalink to this slide"}="#"
+
+%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"}
+%script
+  ="window.jQuery || document.write('<script src=\"#{@path}js/jquery-1.6.4.min.js\">')"
+
+%hr
+%p 
+  Site Map | File icons by
+  %a{:href => "http://plainz.oh.land.to/download_icon.html", :alt => "FineFiles link"}PlainzStyle 
