@@ -59,6 +59,11 @@ module Socrates
 
       @theme_path = File.dirname(__FILE__) + '/views/' + @theme.name
 
+      @theme_imports = YAML.load_file(@theme_path + "/imports.yml")["import"]
+      unless @theme_imports.is_a? Array
+        @theme_imports = [@theme_imports]
+      end
+
       # Common Files
       @common_files = []
       Dir.new(@theme_path + "/common").each do |f|
@@ -68,7 +73,10 @@ module Socrates
         end
       end
 
-      load_common(@theme_path + "/common/header.haml", @theme_path + "/common/footer.haml")
+      load_common(@theme_path + "/common/header.haml",
+                  @theme_path + "/common/slide_header.haml",
+                  @theme_path + "/common/footer.haml",
+                  @theme_path + "/common/slide_footer.haml")
 
       def traverse(start_path, start_dest, traversed = '.')
         path = start_path + "/" + traversed
@@ -91,9 +99,9 @@ module Socrates
               filename = f[0..f.rindex('.') - 1]
               ext = f[f.rindex('.')+1..-1]
               case ext
-              when 'sass' # Render these to CSS
+              when 'sass', 'scss' # Render these to CSS
                 new_ext = 'css'
-              when 'haml', 'md' # Render these to HTML
+              when 'haml', 'md', 'slides' # Render these to HTML
                 new_ext = 'html'
               when 'yml' # Skip YAML configuration files
                 next
@@ -118,6 +126,12 @@ module Socrates
       # Rake the rest of the files
       traverse(@theme_path, destination)
 
+      # Rake theme imports
+      @theme_imports.each do |i|
+        import_path = File.dirname(__FILE__) + '/views/shared/' + i
+        traverse(import_path, destination)
+      end
+
       # Rake course files
       traverse(@course_path, destination)
     end
@@ -129,15 +143,20 @@ module Socrates
     end
     private :commit
 
-    def load_common(header_file, footer_file)
+    def load_common(header_file, slide_header_file, footer_file, slide_footer_file)
       # header file
       @header = File.read(header_file)
+      @slide_header = File.read(slide_header_file)
 
       start_index = @header.rindex(/\n/m, -2)+1
       @header_indent = @header[start_index..@header.index(/\S/, start_index)-1]
 
+      start_index = @slide_header.rindex(/\n/m, -2)+1
+      @slide_header_indent = @slide_header[start_index..@slide_header.index(/\S/, start_index)-1]
+
       # footer file
-      @footer = "= Tilt::HamlTemplate.new(@theme_path + '/common/footer.haml').render self"
+      @footer = "= Tilt::HamlTemplate.new('#{footer_file}').render self"
+      @slide_footer = "= Tilt::HamlTemplate.new('#{slide_footer_file}').render self"
     end
     private :load_common
     
@@ -174,8 +193,23 @@ module Socrates
       end
 
       case ext
-      when 'sass'
+      when 'sass', 'scss'
         template = Tilt.new(file)
+      when 'slides'
+        content = @slide_header + "\n" + @slide_header_indent
+
+        content = content + ".markdown" + "\n" + @slide_header_indent + "  " + ":markdown"
+        md_content = File.read(file)
+        content = content + md_content.lines.inject("") do |result, line|
+          result + "\n" + @slide_header_indent + "    " + line
+        end
+
+        content = content + "\n" + @slide_header_indent + @slide_footer
+
+        template = Tilt::HamlTemplate.new(nil, 1, {:format => :html5}) do
+          content
+        end
+
       when 'haml', 'md'
         content = @header + "\n" + @header_indent
 
