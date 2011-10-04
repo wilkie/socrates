@@ -234,7 +234,6 @@ module Socrates
 
         content = content + "\n" + @header_indent + @footer
 
-        puts content
         template = Tilt::HamlTemplate.new(nil, 1, {:format => :html5}) do
           content
         end
