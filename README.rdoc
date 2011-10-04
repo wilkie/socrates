@@ -34,3 +34,6 @@ further details.
 You may elect to use the MIT license as well, if CC-0 does not apply to your region.
 See MIT.txt for further details.
 
+Deck.js is included for convenience. It is licensed under the MIT license.
+jQuery is included for convenience. It is licensed under the MIT license.
+
